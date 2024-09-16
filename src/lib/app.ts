@@ -50,29 +50,33 @@ async function run(profile?: string): Promise<void> {
 			});
 
 			info('Creating events...');
-			await calendar.days.forEachAsync(async (day, dayIndex) => {
+			const allLessons = 'lessons' in calendar
+				? calendar.lessons!.map((day) => day.map((name, index) => ({ name, ...schedule.defaultLessons[index]! })))
+				: calendar.sections;
+
+			await allLessons.forEachAsync(async (lessons, dayIndex) => {
 				const firstDay = new Date(firstDays[dayIndex!]!);
 
 				log(`\t#${dayIndex! + 1}`);
-				await day.forEachAsync(async (lesson, lessonIndex) => {
-					const [ startHour, startMinute ] = schedule.lessons[lessonIndex!]!.split(':').map((str) => parseInt(str));
+				await lessons.forEachAsync(async (lesson) => {
+					const [ startHour, startMinute ] = lesson.startTime.split(':').map((str) => parseInt(str));
 
 					const startDate = new Date(firstDay);
 					startDate.setHours(startHour ?? 0);
 					startDate.setMinutes(startMinute ?? 0);
 
 					const endDate = new Date(startDate);
-					endDate.setMinutes(endDate.getMinutes() + schedule.lessonTime);
+					endDate.setMinutes(endDate.getMinutes() + lesson.length);
 
 					const dayAbbr = firstDay.toLocaleDateString('en-US', { weekday : 'short' }).slice(0, 2).toUpperCase();
 
-					log(`\t${lesson}: ${startDate.toLocaleString('en-US', { timeZone })}`);
+					log(`\t${lesson.name}: ${startDate.toLocaleString('en-US', { timeZone })}`);
 					await calendarAPI.api?.events.insert({
 						calendarId,
 						requestBody : {
 							start      : { dateTime : startDate.toISOString(), timeZone },
 							end        : { dateTime : endDate.toISOString(), timeZone },
-							summary    : lesson,
+							summary    : lesson.name,
 							recurrence : [ `RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=${year + 1}0525T000000Z;BYDAY=${dayAbbr}` ],
 						},
 					}, {});
