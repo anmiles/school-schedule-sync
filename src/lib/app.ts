@@ -1,6 +1,7 @@
 import { filterProfiles, getAPI } from '@anmiles/google-api-wrapper';
+import { error, info, log } from '@anmiles/logger';
 import { calendar as api } from 'googleapis/build/src/apis/calendar';
-import { info, log, error } from '@anmiles/logger';
+
 import schedule from '../../input/schedule.json';
 import '@anmiles/prototypes';
 
@@ -10,7 +11,7 @@ const fullScopes = [
 	'https://www.googleapis.com/auth/calendar.events.owned',
 ];
 
-async function run(profile?: string): Promise<void> {
+export async function run(profile?: string): Promise<void> {
 	if (!profile) {
 		error('Please specify a profile');
 		process.exit(1);
@@ -29,11 +30,11 @@ async function run(profile?: string): Promise<void> {
 
 	for (const foundProfile of filterProfiles(profile)) {
 		info('Creating API...');
-		const calendarAPI = await getAPI((auth) => api({ version : 'v3', auth }), foundProfile, { temporary : true, scopes : fullScopes });
+		const calendarAPI = await getAPI((auth) => api({ version: 'v3', auth }), foundProfile, { temporary: true, scopes: fullScopes });
 
 		for (const calendar of schedule.calendars) {
 			info('Getting calendar...');
-			const allCalendars = await calendarAPI.getItems((api) => api.calendarList, {}, { hideProgress : true });
+			const allCalendars = await calendarAPI.getItems((api) => api.calendarList, {}, { hideProgress: true });
 			const calendarId   = allCalendars.find((c) => c.summary === calendar.name)?.id;
 
 			if (!calendarId) {
@@ -42,11 +43,11 @@ async function run(profile?: string): Promise<void> {
 			}
 
 			info('Clearing calendar...');
-			const allEvents = await calendarAPI.getItems((api) => api.events, { calendarId }, { hideProgress : true });
+			const allEvents = await calendarAPI.getItems((api) => api.events, { calendarId }, { hideProgress: true });
 
 			await allEvents.forEachAsync(async (event) => {
 				log(`\t${event.summary}`);
-				await calendarAPI.api?.events.delete({ calendarId, eventId : event.id ?? '' });
+				await calendarAPI.api?.events.delete({ calendarId, eventId: event.id ?? '' });
 			});
 
 			info('Creating events...');
@@ -68,16 +69,16 @@ async function run(profile?: string): Promise<void> {
 					const endDate = new Date(startDate);
 					endDate.setMinutes(endDate.getMinutes() + lesson.length);
 
-					const dayAbbr = firstDay.toLocaleDateString('en-US', { weekday : 'short' }).slice(0, 2).toUpperCase();
+					const dayAbbr = firstDay.toLocaleDateString('en-US', { weekday: 'short' }).slice(0, 2).toUpperCase();
 
 					log(`\t${lesson.name}: ${startDate.toLocaleString('en-US', { timeZone })}`);
 					await calendarAPI.api?.events.insert({
 						calendarId,
-						requestBody : {
-							start      : { dateTime : startDate.toISOString(), timeZone },
-							end        : { dateTime : endDate.toISOString(), timeZone },
-							summary    : lesson.name,
-							recurrence : [ `RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=${year + 1}0525T000000Z;BYDAY=${dayAbbr}` ],
+						requestBody: {
+							start     : { dateTime: startDate.toISOString(), timeZone },
+							end       : { dateTime: endDate.toISOString(), timeZone },
+							summary   : lesson.name,
+							recurrence: [ `RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=${year + 1}0525T000000Z;BYDAY=${dayAbbr}` ],
 						},
 					}, {});
 				});
@@ -85,6 +86,3 @@ async function run(profile?: string): Promise<void> {
 		}
 	}
 }
-
-export { run };
-export default { run };
