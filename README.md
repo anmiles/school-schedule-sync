@@ -1,4 +1,4 @@
-# school
+# school-schedule-sync
 
 Synchronization between JSON schedule and Google Calendar
 
@@ -7,10 +7,11 @@ Synchronization between JSON schedule and Google Calendar
 ## Installation
 
 ```bash
-git clone https://github.com/anmiles/school.git
-cd school
+git clone https://github.com/anmiles/school-schedule-sync.git
+cd school-schedule-sync
 npm clean-install
 npm run build
+copy config/schedule.sample.json config/schedule.json
 ```
 
 ## Adding profiles
@@ -29,5 +30,5 @@ You can create as many profiles as you want.
 
 ## Usage
 
-- Create schedule in `./input/schedule.json` file
+- Make your own schedule in `./config/schedule.json` file
 - `npm start <profile>` to create calendar entries in selected profile

@@ -1,0 +1,115 @@
+{
+	"defaults": {
+		"lessonTimes": [
+			{ "startTime": "08:00", "length": 45 },
+			{ "startTime": "09:00", "length": 45 },
+			{ "startTime": "10:00", "length": 45 },
+			{ "startTime": "11:30", "length": 45 },
+			{ "startTime": "12:30", "length": 45 }
+		]
+	},
+	"calendars": [
+		{
+			"name": "First grade lessons",
+			"type": "lessons",
+			"days": [
+				[
+					"Reading",
+					"Writing",
+					"Art",
+					"Music"
+				],
+				[
+					"Math",
+					"Story Time",
+					"Physical Education",
+					"Drawing",
+					"Crafts"
+				],
+				[
+					"Nature Study",
+					"Handwriting",
+					"Singing",
+					"Painting"
+				],
+				[
+					"Math",
+					"Reading",
+					"Game Time",
+					"Art",
+					"Story Time"
+				],
+				[
+					"English",
+					"Coloring",
+					"Physical Education",
+					"Story Time"
+				]
+			]
+		},
+		{
+			"name": "High school lessons",
+			"type": "lessons",
+			"days": [
+				[
+					"Mathematics",
+					"English Literature",
+					"Physics",
+					"History",
+					"Computer Science"
+				],
+				[
+					"Chemistry",
+					"Physical Education",
+					"English Language",
+					"Biology"
+				],
+				[
+					"Geography",
+					"Mathematics",
+					"Economics",
+					"Art",
+					"Philosophy"
+				],
+				[
+					"English Language",
+					"Physics",
+					"History",
+					"Computer Science"
+				],
+				[
+					"Biology",
+					"Mathematics",
+					"Chemistry",
+					"English Literature",
+					"Physical Education"
+				]
+			],
+			"lessonTimes": [
+				{ "startTime": "14:00", "length": 45 },
+				{ "startTime": "15:00", "length": 45 },
+				{ "startTime": "16:00", "length": 45 },
+				{ "startTime": "17:30", "length": 45 },
+				{ "startTime": "18:30", "length": 45 }
+			]
+		},
+		{
+			"name": "First grade sections",
+			"type": "sections",
+			"days": [
+				[
+					{ "name":"Lego Club", "startTime": "13:00", "length": 45 }
+				],
+				[],
+				[
+					{ "name": "Puppet Theater", "startTime": "13:00", "length": 30 },
+					{ "name": "Kids Science Club", "startTime": "14:00", "length": 30 }
+				],
+				[],
+				[
+					{ "name": "Dance Class", "startTime": "13:00", "length": 45 }
+				]
+			]
+		}
+	]
+}
