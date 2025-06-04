@@ -33,10 +33,10 @@
 		"login": "node ./dist/login.js"
 	},
 	"dependencies": {
-		"@anmiles/express-tools": "^1.0.0",
 		"@anmiles/google-api-wrapper": "^19.0.4",
 		"@anmiles/logger": "^8.0.0",
 		"@anmiles/prototypes": "^11.1.0",
+		"@anmiles/zod-tools": "^1.0.0",
 		"googleapis": "^148.0.0",
 		"zod": "^3.25.48"
 	},

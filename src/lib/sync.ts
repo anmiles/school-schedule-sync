@@ -1,8 +1,8 @@
 import fs from 'fs';
 
-import { validate } from '@anmiles/express-tools';
 import { getAPI } from '@anmiles/google-api-wrapper';
 import { info, log } from '@anmiles/logger';
+import { validate } from '@anmiles/zod-tools';
 import { calendar as api } from 'googleapis/build/src/apis/calendar';
 import '@anmiles/prototypes';
 

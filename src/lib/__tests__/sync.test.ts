@@ -1,7 +1,7 @@
 import fs from 'fs';
 
-import { validate } from '@anmiles/express-tools';
 import { getAPI } from '@anmiles/google-api-wrapper';
+import { validate } from '@anmiles/zod-tools';
 import type GoogleApis from 'googleapis';
 // eslint-disable-next-line camelcase
 import type { calendar_v3, MethodOptions } from 'googleapis/build/src/apis/calendar';
