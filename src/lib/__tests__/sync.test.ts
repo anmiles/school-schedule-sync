@@ -57,6 +57,16 @@ jest.mocked(calendar).mockReturnValue(calendarApis as unknown as GoogleApis.cale
 const scheduleJSON = fs.readJSON(getSampleScheduleFile());
 const schedule     = validate(scheduleJSON, scheduleSchema);
 
+beforeAll(() => {
+	jest.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions').mockReturnValue({
+		locale         : 'en-US',
+		calendar       : 'gregory',
+		numberingSystem: 'latn',
+		timeZone       : 'UTC',
+		timeZoneName   : 'short',
+	});
+});
+
 beforeEach(() => {
 	mockFs({
 		[getScheduleFile()]: JSON.stringify(schedule),

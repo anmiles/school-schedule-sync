@@ -16,10 +16,9 @@ const fullScopes = [
 	'https://www.googleapis.com/auth/calendar.events.owned',
 ];
 
-const YEAR     = new Date().getFullYear();
-const TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
 export async function sync(profile: string): Promise<void> {
+	const YEAR     = new Date().getFullYear();
+	const TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 	const scheduleJSON = fs.readJSON(getScheduleFile());
 	const schedule     = validate(scheduleJSON, scheduleSchema);
