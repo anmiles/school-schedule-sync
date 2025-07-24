@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`src/lib/sync sync should create all events for schedule 1`] = `
 "lessons-1th	{}	2025-09-01T05:00:00.000Z	UTC	2025-09-01T05:45:00.000Z	UTC	RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=20260525T000000Z;BYDAY=MO	Reading
