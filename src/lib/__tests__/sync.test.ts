@@ -18,6 +18,15 @@ jest.mock('@anmiles/google-api-wrapper');
 jest.mock('@anmiles/logger');
 jest.mock('googleapis/build/src/apis/calendar');
 
+type Calendar = {
+	id: string;
+	summary: string;
+};
+
+type Event = {
+	id?: string;
+};
+
 const profile = 'username';
 
 const calendarApis = {
@@ -46,8 +55,9 @@ const getAPIMock = jest.fn().mockImplementation(async () => ({ getItems, api }))
 
 const auth = { kind: 'auth' };
 
-let calendars: Array<{ id?: string | null | undefined; summary?: string; description?: string; hidden?: boolean }>;
-let events: Array<{ id?: string | null | undefined; summary?: string; organizer?: { email?: string; displayName?: string; self?: boolean } }>;
+let calendars: Calendar[];
+let events: Event[];
+let selectedCalendar: Calendar;
 
 jest.mocked(getAPI).mockImplementation((...args: unknown[]) => getAPIMock(...args));
 
@@ -83,6 +93,8 @@ beforeEach(() => {
 		{ },
 		{ id: 'id3' },
 	];
+
+	selectedCalendar = calendars[0]!;
 });
 
 afterAll(() => {
@@ -117,6 +129,14 @@ describe('src/lib/sync', () => {
 			const promise = async (): Promise<unknown> => sync(profile);
 
 			await expect(promise).rejects.toEqual(new Error(`There are no available calendars for profile '${profile}'`));
+		});
+
+		it('should throw if the specified calendar is not found', async () => {
+			const wrongCalendarName = 'Wrong calendar';
+
+			const promise = async (): Promise<unknown> => sync(profile, wrongCalendarName);
+
+			await expect(promise).rejects.toThrow(`There is no calendar '${wrongCalendarName}' for profile '${profile}'`);
 		});
 
 		it('should throw if there are no matching calendars', async () => {
@@ -171,6 +191,24 @@ describe('src/lib/sync', () => {
 					{ hideProgress: true },
 				);
 			});
+		});
+
+		it('should get events for the specified calendar without showing progress', async () => {
+			await sync(profile, selectedCalendar.summary);
+
+			expect(getItems).toHaveBeenCalledTimes(2);
+
+			expect(getItems).toHaveBeenCalledWith(
+				expect.toBeFunction([ calendarApis ], calendarApis.calendarList),
+				{ },
+				{ hideProgress: true },
+			);
+
+			expect(getItems).toHaveBeenCalledWith(
+				expect.toBeFunction([ calendarApis ], calendarApis.events),
+				{ calendarId: selectedCalendar.id },
+				{ hideProgress: true },
+			);
 		});
 
 		it('should delete all existing events in calendars', async () => {

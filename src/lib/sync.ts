@@ -16,7 +16,7 @@ const fullScopes = [
 	'https://www.googleapis.com/auth/calendar.events.owned',
 ];
 
-export async function sync(profile: string): Promise<void> {
+export async function sync(profile: string, calendarName?: string): Promise<void> {
 	const YEAR     = new Date().getFullYear();
 	const TIMEZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -30,7 +30,15 @@ export async function sync(profile: string): Promise<void> {
 		throw new Error(`There are no available calendars for profile '${profile}'`);
 	}
 
-	for (const calendar of schedule.calendars) {
+	const selectedCalendars = calendarName
+		? schedule.calendars.filter((calendar) => calendar.name === calendarName)
+		: schedule.calendars;
+
+	if (selectedCalendars.length === 0) {
+		throw new Error(`There is no calendar '${calendarName}' for profile '${profile}'`);
+	}
+
+	for (const calendar of selectedCalendars) {
 		info(`Calendar '${calendar.name}'...`);
 		const calendarId = allCalendars.find((c) => c.summary === calendar.name)?.id;
 

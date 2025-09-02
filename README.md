@@ -31,4 +31,5 @@ You can create as many profiles as you want.
 ## Usage
 
 - Make your own schedule in `./config/schedule.json` file
-- `npm start <profile>` to create calendar entries in selected profile
+- `npm start <profile>` to create/recreate calendar entries for selected profile
+- `npm start <profile> <calendar_name>` to create/recreate calendar entries for selected profile for the specified calendar
