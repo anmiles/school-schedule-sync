@@ -6,7 +6,8 @@ import { validate } from '@anmiles/zod-tools';
 import { calendar as api } from 'googleapis/build/src/apis/calendar';
 import '@anmiles/prototypes';
 
-import { scheduleSchema  } from './types';
+import {  scheduleSchema } from './types';
+import type { Event } from './types';
 import { getFirstDay } from './utils/getFirstDay';
 import { getScheduleFile } from './utils/paths';
 
@@ -56,7 +57,7 @@ export async function sync(profile: string, calendarName?: string): Promise<void
 
 		log('Creating events...');
 
-		const sectionsOrLessons = calendar.type === 'sections'
+		const sectionsOrLessons: Event[][] = calendar.type === 'sections'
 			? calendar.days
 			: calendar.days.map((day) => day.map((name, index) => {
 					const time = calendar.lessonTimes?.[index] ?? schedule.defaults.lessonTimes?.[index];
@@ -92,6 +93,7 @@ export async function sync(profile: string, calendarName?: string): Promise<void
 						start     : { dateTime: startDate.toISOString(), timeZone: TIMEZONE },
 						end       : { dateTime: endDate.toISOString(), timeZone: TIMEZONE },
 						summary   : event.name,
+						location  : event.location,
 						recurrence: [ `RRULE:FREQ=WEEKLY;WKST=MO;UNTIL=${YEAR + 1}0525T000000Z;BYDAY=${dayAbbr}` ],
 					},
 				}, {});

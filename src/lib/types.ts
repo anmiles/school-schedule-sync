@@ -6,8 +6,11 @@ const timeSchema = z.object({
 });
 
 const eventSchema = timeSchema.extend({
-	name: z.string(),
+	name    : z.string(),
+	location: z.string().optional(),
 });
+
+export type Event = z.infer<typeof eventSchema>;
 
 const lessonSchema  = z.string();
 const sectionSchema = eventSchema;

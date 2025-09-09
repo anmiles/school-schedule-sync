@@ -98,7 +98,7 @@
 			"type": "sections",
 			"days": [
 				[
-					{ "name":"Lego Club", "startTime": "13:00", "length": 45 }
+					{ "name":"Lego Club", "startTime": "13:00", "length": 45, "location": "Room 312" }
 				],
 				[],
 				[
@@ -107,7 +107,7 @@
 				],
 				[],
 				[
-					{ "name": "Dance Class", "startTime": "13:00", "length": 45 }
+					{ "name": "Dance Class", "startTime": "13:00", "length": 45, "location": "Disco hall" }
 				]
 			]
 		}

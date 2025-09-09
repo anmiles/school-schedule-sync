@@ -242,5 +242,6 @@ function stringifyInsertCall(insertCall: [calendar_v3.Params$Resource$Events$Ins
 		insertCall[0].requestBody?.end?.timeZone,
 		insertCall[0].requestBody?.recurrence,
 		insertCall[0].requestBody?.summary,
+		insertCall[0].requestBody?.location,
 	].join('\t');
 }
