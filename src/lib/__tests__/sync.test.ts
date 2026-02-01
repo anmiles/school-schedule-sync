@@ -34,7 +34,7 @@ const calendarApis = {
 	events      : 'events',
 } as const;
 
-function mockGetItems(selectAPI: (api: typeof calendarApis)=> typeof calendarApis[keyof typeof calendarApis]): typeof calendars | typeof events {
+function mockGetItems(selectAPI: (api: typeof calendarApis) => typeof calendarApis[keyof typeof calendarApis]): typeof calendars | typeof events {
 	switch (selectAPI(calendarApis)) {
 		case calendarApis.calendarList: return calendars;
 		case calendarApis.events: return events;
@@ -75,6 +75,8 @@ beforeAll(() => {
 		timeZone       : 'UTC',
 		timeZoneName   : 'short',
 	});
+
+	jest.spyOn(Date.prototype, 'getFullYear').mockReturnValue(2025);
 });
 
 beforeEach(() => {
@@ -90,7 +92,7 @@ beforeEach(() => {
 
 	events = [
 		{ id: 'id1' },
-		{ },
+		{},
 		{ id: 'id3' },
 	];
 
@@ -126,7 +128,7 @@ describe('src/lib/sync', () => {
 		it('should throw if there are no available calendars', async () => {
 			calendars = [];
 
-			const promise = async (): Promise<unknown> => sync(profile);
+			const promise = sync(profile);
 
 			await expect(promise).rejects.toEqual(new Error(`There are no available calendars for profile '${profile}'`));
 		});
@@ -134,7 +136,7 @@ describe('src/lib/sync', () => {
 		it('should throw if the specified calendar is not found', async () => {
 			const wrongCalendarName = 'Wrong calendar';
 
-			const promise = async (): Promise<unknown> => sync(profile, wrongCalendarName);
+			const promise = sync(profile, wrongCalendarName);
 
 			await expect(promise).rejects.toThrow(`There is no calendar '${wrongCalendarName}' for profile '${profile}'`);
 		});
@@ -151,7 +153,7 @@ describe('src/lib/sync', () => {
 				[getScheduleFile()]: JSON.stringify(savedSchedule),
 			});
 
-			const promise = async (): Promise<unknown> => sync(profile);
+			const promise = sync(profile);
 
 			await expect(promise).rejects.toEqual(new Error(`Unknown calendar 'random calendar name' for profile '${profile}'`));
 		});
@@ -168,7 +170,7 @@ describe('src/lib/sync', () => {
 				[getScheduleFile()]: JSON.stringify(savedSchedule),
 			});
 
-			const promise = async (): Promise<unknown> => sync(profile);
+			const promise = sync(profile);
 
 			await expect(promise).rejects.toEqual(new Error('Cannot find time described for lesson #6 in calendar \'First grade lessons\''));
 		});
@@ -180,7 +182,7 @@ describe('src/lib/sync', () => {
 
 			expect(getItems).toHaveBeenCalledWith(
 				expect.toBeFunction([ calendarApis ], calendarApis.calendarList),
-				{ },
+				{},
 				{ hideProgress: true },
 			);
 
@@ -200,7 +202,7 @@ describe('src/lib/sync', () => {
 
 			expect(getItems).toHaveBeenCalledWith(
 				expect.toBeFunction([ calendarApis ], calendarApis.calendarList),
-				{ },
+				{},
 				{ hideProgress: true },
 			);
 
