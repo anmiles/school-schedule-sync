@@ -14,36 +14,36 @@
 			"type": "lessons",
 			"days": [
 				[
-					"Reading",
-					"Writing",
-					"Art",
-					"Music"
+					{ "name": "Reading", "location": "Room 312" },
+					{ "name": "Writing", "location": "Room 312" },
+					{ "name": "Art", "location": "Room 312" },
+					{ "name": "Music", "location": "Room 312" }
 				],
 				[
-					"Math",
-					"Story Time",
-					"Physical Education",
-					"Drawing",
-					"Crafts"
+					{ "name": "Math", "location": "Room 312" },
+					{ "name": "Story Time", "location": "Room 312" },
+					{ "name": "Physical Education", "location": "Room 312" },
+					{ "name": "Drawing", "location": "Room 312" },
+					{ "name": "Crafts", "location": "Room 312" }
 				],
 				[
-					"Nature Study",
-					"Handwriting",
-					"Singing",
-					"Painting"
+					{ "name": "Nature Study", "location": "Room 312" },
+					{ "name": "Handwriting", "location": "Room 312" },
+					{ "name": "Singing", "location": "Room 312" },
+					{ "name": "Painting", "location": "Room 312" }
 				],
 				[
-					"Math",
-					"Reading",
-					"Game Time",
-					"Art",
-					"Story Time"
+					{ "name": "Math", "location": "Room 312" },
+					{ "name": "Reading", "location": "Room 312" },
+					{ "name": "Game Time", "location": "Room 312" },
+					{ "name": "Art", "location": "Room 312" },
+					{ "name": "Story Time", "location": "Room 312" }
 				],
 				[
-					"English",
-					"Coloring",
-					"Physical Education",
-					"Story Time"
+					{ "name": "English", "location": "Room 312" },
+					{ "name": "Coloring", "location": "Room 312" },
+					{ "name": "Physical Education", "location": "Room 312" },
+					{ "name": "Story Time", "location": "Room 312" }
 				]
 			]
 		},
@@ -52,37 +52,37 @@
 			"type": "lessons",
 			"days": [
 				[
-					"Mathematics",
-					"English Literature",
-					"Physics",
-					"History",
-					"Computer Science"
+					{ "name": "Mathematics", "location": "Room 312" },
+					{ "name": "English Literature", "location": "Room 312" },
+					{ "name": "Physics", "location": "Room 312" },
+					{ "name": "History", "location": "Room 312" },
+					{ "name": "Computer Science", "location": "Room 312" }
 				],
 				[
-					"Chemistry",
-					"Physical Education",
-					"English Language",
-					"Biology"
+					{ "name": "Chemistry", "location": "Room 312" },
+					{ "name": "Physical Education", "location": "Room 312" },
+					{ "name": "English Language", "location": "Room 312" },
+					{ "name": "Biology", "location": "Room 312" }
 				],
 				[
-					"Geography",
-					"Mathematics",
-					"Economics",
-					"Art",
-					"Philosophy"
+					{ "name": "Geography", "location": "Room 312" },
+					{ "name": "Mathematics", "location": "Room 312" },
+					{ "name": "Economics", "location": "Room 312" },
+					{ "name": "Art", "location": "Room 312" },
+					{ "name": "Philosophy", "location": "Room 312" }
 				],
 				[
-					"English Language",
-					"Physics",
-					"History",
-					"Computer Science"
+					{ "name": "English Language", "location": "Room 312" },
+					{ "name": "Physics", "location": "Room 312" },
+					{ "name": "History", "location": "Room 312" },
+					{ "name": "Computer Science", "location": "Room 312" }
 				],
 				[
-					"Biology",
-					"Mathematics",
-					"Chemistry",
-					"English Literature",
-					"Physical Education"
+					{ "name": "Biology", "location": "Room 312" },
+					{ "name": "Mathematics", "location": "Room 312" },
+					{ "name": "Chemistry", "location": "Room 312" },
+					{ "name": "English Literature", "location": "Room 312" },
+					{ "name": "Physical Education", "location": "Room 312" }
 				]
 			],
 			"lessonTimes": [

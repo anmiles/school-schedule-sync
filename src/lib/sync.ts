@@ -59,14 +59,14 @@ export async function sync(profile: string, calendarName?: string): Promise<void
 
 		const sectionsOrLessons: Event[][] = calendar.type === 'sections'
 			? calendar.days
-			: calendar.days.map((day) => day.map((name, index) => {
+			: calendar.days.map((day) => day.map((item, index) => {
 					const time = calendar.lessonTimes?.[index] ?? schedule.defaults.lessonTimes?.[index];
 
 					if (!time) {
 						throw new Error(`Cannot find time described for lesson #${index + 1} in calendar '${calendar.name}'`);
 					}
 
-					return { name, ...time };
+					return { ...item, ...time };
 				}));
 
 		await sectionsOrLessons.forEachAsync(async (events, weekDay) => {

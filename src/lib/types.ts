@@ -5,14 +5,16 @@ const timeSchema = z.object({
 	length   : z.number(),
 });
 
-const eventSchema = timeSchema.extend({
+const itemSchema = z.object({
 	name    : z.string(),
 	location: z.string().optional(),
 });
 
+const eventSchema = itemSchema.extend(timeSchema.shape);
+
 export type Event = z.infer<typeof eventSchema>;
 
-const lessonSchema  = z.string();
+const lessonSchema  = itemSchema;
 const sectionSchema = eventSchema;
 
 const lessonCalendarSchema = z.object({

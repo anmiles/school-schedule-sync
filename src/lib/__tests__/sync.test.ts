@@ -163,7 +163,7 @@ describe('src/lib/sync', () => {
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion
 			const savedCalendar = savedSchedule.calendars[0] as LessonCalendar;
 
-			savedCalendar.days[1]!.push('6th lesson');
+			savedCalendar.days[1]!.push({ name: '6th lesson' });
 			savedSchedule.calendars[0] = savedCalendar;
 
 			mockFs({
