@@ -1,6 +1,6 @@
 {
 	"name": "school-schedule-sync",
-	"version": "3.3.0",
+	"version": "4.0.0",
 	"description": "Synchronization between JSON schedule and Google Calendar",
 	"keywords": [
 		"school",
